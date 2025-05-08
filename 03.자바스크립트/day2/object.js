@@ -11,6 +11,14 @@ const userB = {
     gender : "남자"
 
 }
+const users = [userA, userB]
+console.log(users[0]);
+console.log(users[1]);
+console.log(users[1].age);
+console.log(users[1]["age"]);
+console.log(users[1]["gender"]);
+console.log(users[1].gender);
+
 console.log(userA);
 console.log(userA.name + ", " + userB.name);
 console.log(userA.age);
