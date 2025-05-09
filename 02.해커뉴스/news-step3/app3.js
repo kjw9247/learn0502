@@ -23,15 +23,10 @@ window.addEventListener("hashchange",() => {
     const ul = document.createElement("ul")
     const newsContent = JSON.parse(xhr.responseText)
     console.log(newsContent);
-
-    //이전에 제목이 있나?
-    while(content.firstChild){//0만 false이고 나머지는 다 true이다
-      content.removeChild(content.firstChild)
-    }
     content.innerHTML = ""
     const title = document.createElement("h1")
     title.innerText = newsContent.title
-    content.appendChild(title)//
+    content.replaceChildren(title)//
   });
   /*
   replacerChildren()함수는 한번의 호출로 기존이 모든 자식 요소를 제거하고

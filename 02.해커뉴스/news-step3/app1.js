@@ -3,25 +3,30 @@ const xhr = new XMLHttpRequest()
 const content = document.createElement("div")
 const NEWS_URL = "https://api.hnpwa.com/v0/news/1.json"
 const CONTENT_URL = "https://api.hnpwa.com/v0/item/@ID.json"
-xhr.open("GET", NEWS_URL, false)
-xhr.send()
 
-const newsList = JSON.parse(xhr.responseText)
+//getData함수의 파라미터 자리에 url에 대입되는 값은 언제 결정되나?
+//호출할 때 결정된다.
+//파라미터 자리에 선언된 변수는 지역변수이다. - 기초
+function getData(url){
+  xhr.open("GET", url, false)
+  xhr.send()
+  return JSON.parse(xhr.responseText)
+  //이 함수는 return이 필요하다? O
+}//end of getData
+
+const newsList = getData(NEWS_URL)
 const ul = document.createElement("ul")
 
-//개발자가 호출하는 함수가 아니라 시스템에서 이벤트가 감지되었을 때
-//자동으로 호출된다 - callback
-//뉴스제목을 클릭하면 URL이 바뀌는데 그것을 감지하는게 hashchange
 window.addEventListener("hashchange",() => {
     const id = location.hash.substring(1)
-    xhr.open("GET", CONTENT_URL.replace("@ID", id), false)
-    xhr.send()
+    const newsList = getData(CONTENT_URL.replace("@ID", id))
+    const ul = document.createElement("ul")
     const newsContent = JSON.parse(xhr.responseText)
     console.log(newsContent);
+    content.innerHTML = ""//
     const title = document.createElement("h1")
     title.innerText = newsContent.title
     content.appendChild(title)
-
   });
 
 
