@@ -13,8 +13,8 @@ function getData(url){
   return JSON.parse(xhr.responseText)
 }//end of getData
 
-function newsDetail(){
-    const id = location.hash.substring(7)
+  function newsDetail(){
+      const id = location.hash.substring(7)
     console.log(id);
     const newsContent = getData(CONTENT_URL.replace("@id", id))
     container.innerHTML = `
@@ -35,7 +35,7 @@ function newsSource(){
   for(let i=(store.currentPage-1)*10;i<store.currentPage*10;i++){
     newsList.push(`
       <li>
-        <a href="#${news[i].id}">
+        <a href="#/show/${news[i].id}">
           ${news[i].title}(${news[i].comments_count})
         </a>
       </li>
