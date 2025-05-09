@@ -15,8 +15,8 @@ function getData(url){
 
 function newsDetail(){
     const id = location.hash.substring(7)
-    console.log(id);
     const newsContent = getData(CONTENT_URL.replace("@id", id))
+    console.log(newsContent);
     container.innerHTML = `
       <h1>${newsContent.title}</h1>
       <div>

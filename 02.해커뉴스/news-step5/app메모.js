@@ -3,16 +3,21 @@ const container = document.querySelector("#root")
 const content = document.createElement("div")
 const NEWS_URL = "https://api.hnpwa.com/v0/news/1.json"
 const CONTENT_URL = "https://api.hnpwa.com/v0/item/@id.json"
-
+//현재페이지번호 관리
 const store = {
    currentPage: 1,
 }
+//해커뉴스 서버에 요청할 때 사용하는 함수 구현 - 공통함수
 function getData(url){
   xhr.open("GET", url, false)
   xhr.send() 
   return JSON.parse(xhr.responseText)
 }//end of getData
-
+//뉴스상세 페이지 구현
+//사용자가 클릭한 뉴스 제목의 id숫자를 알아낸다.
+//@id에 id숫자를 치환한다.
+//h1태그붙여서 제목을 쓴다.
+//그리고 목록으로 돌아갈 링크를 작성한다.
 function newsDetail(){
     const id = location.hash.substring(7)
     console.log(id);
@@ -25,8 +30,11 @@ function newsDetail(){
     `
 }
 
+
+//목록을 출력하는 함수 구현
 function newsSource(){
-  let currentPage = 1
+  //현재 페이지 정보를 담을 변수 선언
+  let currentPage = 1//시작페이지가 0페이지는 없으니까 초기값은 1로 함.
   const news = getData(NEWS_URL)
   const newsList = []
   newsList.push("<ul>")
@@ -42,7 +50,10 @@ function newsSource(){
     `)
   }
   newsList.push('</ul>')
+  //마지막 페이지 이라면 더 이상 숫자가 증가되면 안된다.
+  //전체 페이지 수를 구하는 코드
   const totalPages = Math.ceil(news.length / 10)
+  //화면에 이전페이지 버튼과 다음 페이지 버튼 만들기
   newsList.push(`
     <div>
       <a href="#/page/${store.currentPage > 1 ? store.currentPage-1 : store.currentPage}">이전페이지</a>
@@ -53,6 +64,10 @@ function newsSource(){
   container.innerHTML = newsList.join('')
 }//end of newsSource
 
+/***********************************************************
+ * 라우팅 추가 부분
+ * 세가지 경우의 수:최초일때, 해시에 page가 있을때, 해시에 show가 있을때
+ ***********************************************************/
 function router() {
   console.log("router호출 성공");
   const routePath = location.hash
@@ -75,3 +90,37 @@ function router() {
 window.addEventListener('hashchange', router)
 //최초 한 번 호출을 위해서 추가하기
 router()
+//router()
+//라우터 설계하기
+
+//2페이지로 페이징이 된 다음에 그 중에 어떤 글이 마음에 들어서 페이지 글을 클릭했어요
+//그래서 글 내용으로 들어갔어요 - 뉴스상세 페이지처리
+//뉴스상세보기페이지
+function newsDetail(){
+  const routerPath = location.hash
+  // == 값만 비교, === 값도 비교하고 타입도 비교함.
+  if(routePath === ''){
+    newsSource()
+  }else{
+    newsSource()
+  }
+
+  }
+  /*CONTENT_URL
+  목록으로 가는 버튼이 있다.
+  내가 이전에 어느 페이지에 있었지?
+  http://localhost:5500/index.html#/page/2
+  http://localhost:5500/index.html#/page/3
+  */
+
+/*상세페이지 링크
+http://localhost:5500/index.html#/show/id값
+*/
+
+//화면이 두 개 라서 현재 페이지가 얼마인지 기억해야 함.
+//현재페이지를 저장하는 변수가 필요하다.
+//현재 페이지는 변한다 > 상태관리 > 오브젝트
+
+/*const store = {
+  currentPage: 1,
+*/
