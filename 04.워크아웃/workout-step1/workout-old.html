@@ -5,17 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="https://kit.fontawesome.com/b2126d00c5.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="./workout.css">
 </head>
 <body>
-  <script>
-  window.addEventListener("load", (event) => {
-    init ()
-  });
-</script>
   <ul class="ul"></ul>
     <script>
-      console.log("여기");
         const items = [
             {id:1, name: '벤치프레스', count: 0},
             {id:2, name: '렛풀다운', count: 0},
@@ -31,8 +24,7 @@
         const handleDelete = (event) => {
           console.log("handleDelete호출 성공");
         }
-        const init = () => {
-                let lis = ''
+        let lis = ''
         for (let i = 0; i < items.length; i++) {
             lis += '<li class"workout">' // lis = lis + '<li class"workout">'
             lis += `<span class="workout-name">${items[i].name}</span>`//{items[i]}{name}
@@ -47,12 +39,9 @@
             lis += `<i class="fas fa-trash"></i>`
             lis += `</button>`
             lis += '</li>'
-        }//end of for
+        }
         const ul = document.querySelector(".ul")// root일땐 id니까 # 지금은 class니까 .
         ul.innerHTML = lis
-    }//end of init
-
-
     </script>
 </body>
 </html>
