@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://kit.fontawesome.com/3b3af91d34.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="./workout2.css">
+</head>
+<body>
+  <script>
+    window.addEventListener("load", (event) => {
+      init()
+    });
+  </script>
+  <ul class="ul"></ul>
+  <script>
+    console.log("여기");
+    let items = [
+      {id:1, name: '벤치프레스', count: 0},
+      {id:2, name: '렛풀다운', count: 0},
+      {id:3, name: '스쿼트', count: 0},
+    ]
+    const handleIncrement = (id) => {
+      console.log("handleIncrement호출 성공" +id);
+      console.log(`사용자가 선택한 운동이름의 식별자 값 : ${id}`);
+      const index = id -1
+      // 증가는 100이든 1000이든 문제가 안되겠지만 감소는 -1이 나올 수도 있다(고려해야 함)
+      // -1이 나오는 경우를 필터링 해야 한다. -> 변수로 선언하여 삼항연산자로 처리 하였다
+      items[index].count = items[index].count +1
+      const cnt = document.querySelector(`.workout-count${id}`)
+      cnt.innerHTML = items[index].count
+    }//arrow function
+    const handleDecrement = (id) => {
+      console.log("handleDecrement호출 성공");
+      const index = id -1
+      const count = items[index].count -1
+      // 37번에 선언한 count가 0보다 작나? 예 아니
+      items[index].count = count < 0 ? 0 : count // 삼항연사자이다
+      const cnt = document.querySelector(`.workout-count${id}`)
+      cnt.innerHTML = items[index].count
+    }//end of handleDecrement
+    // 44번 함수의 파라미터 자리 id는 언제 누구에 의해서 결정되나?
+    const handleDelete = (id) => {
+      console.log("handleDelete호출 성공");
+      const workouts = items.filter(row => row.id !=id)
+      items = [...workouts]
+      console.log(items.length); //2
+      // insert here
+      init()
+
+    }//end of handleDelete
+    const init = () => {
+      let lis = ''
+      for(let i=0;i<items.length;i=i+1){
+        lis = lis + '<li class="workout">'
+        lis = lis +`<span class="workout-name">${items[i].name}</span>`
+        lis = lis +`<span class="workout-count${items[i].id}">${items[i].count}</span>`
+        lis = lis +`<button class="workout-button workout-increase" onClick="handleIncrement('${items[i].id}')">`
+        lis = lis +'<i class="fas fa-plus-square"></i>'
+        lis = lis +'</button>'
+        lis = lis +`<button class="workout-button workout-decrease" onClick="handleDecrement('${items[i].id}')">`
+        lis = lis +'<i class="fas fa-minus-square"></i>'
+        lis = lis +'</button>'
+        lis = lis +`<button class="workout-button workout-delete" onClick="handleDelete('${items[i].id}')">`
+        lis = lis +'<i class="fas fa-trash"></i>'
+        lis = lis +'</button>'
+        lis = lis +'</li>'
+      }//end of for
+      const ul = document.querySelector(".ul")
+      ul.innerHTML = lis
+    }//end of init
+
+
+  </script>
+
+</body>
+</html>

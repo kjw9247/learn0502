@@ -1,0 +1,91 @@
+*{
+  /* 1. padding, margin width나 height 포함되도록 */
+  box-sizing: border-box;
+}
+
+ul {
+  /* 2. 기본 패딩과 구슬 없애기 */
+  padding: 0;
+  list-style: none;
+}
+
+body {
+  /* 3. 디스플레이 배경색 지정 */
+  background-color: #b6f8f5;
+  /* 4. 디스플레이 가운데 정렬 */
+  text-align: center;
+}
+
+button {
+  outline: none;
+  border: none;
+  cursor: pointer;
+}
+
+.list {/* <section> */
+  width: 400px;
+  background-color: rgb(236, 246, 250);
+  margin: 30px auto;
+  border-radius: 20px;
+}
+
+.header {
+  height: 48px;
+  padding: 8px;
+  background: #a6f5e5;
+  background: linear-gradient(90deg, rgba(166, 245, 229, 1) 0%, rgba(65, 186, 196, 1) 52%, rgba(116, 214, 149, 1) 100%);
+  color: white;
+  border-radius: 20px 20px 0 0;
+}
+
+.items { /* ul태그 */
+  height: 450px;
+}
+
+/* 오늘 할일 목록 리스트 시작 되는 부분 */
+.item {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 32px;
+}
+
+.item-delete:hover {
+  color: darkred;
+  transform: scale(1.1);
+  transition: transform 300ms ease-in
+}
+
+.item_divider {
+  width: 90%;
+  background-color: rgb(209, 233, 233);
+  height: 2px;
+  margin: auto;
+}
+
+.footer {
+  background: #a6f5e5;
+  background: linear-gradient(90deg, rgba(166, 245, 229, 1) 0%, rgba(65, 186, 196, 1) 52%, rgba(116, 214, 149, 1) 100%);
+  color: white;
+  border-radius: 0 0 20px 20px;
+}
+
+.footer_input { 
+  width: 100%;
+  height: 32px;
+  border: none;
+  outline: none;
+  font-size: 20px;
+  padding: 0 16px;
+}
+
+.footer_button {
+  width: 48px;
+  height: 48px;
+  font-size: 28px;
+  border-radius: 50%;
+}
+
+.reset_button:hover{
+  transform: rotate(180deg);
+  color: rgb(252, 136, 98)
+}

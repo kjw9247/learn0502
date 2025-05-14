@@ -6,11 +6,12 @@
 ul {
   /* 2. 기본 패딩과 구슬 없애기 */
   padding: 0;
+  list-style: none;
 }
 
 body {
   /* 3. 디스플레이 배경색 지정 */
-  background-color: #f0dede;
+  background-color: #b6f8f5;
   /* 4. 디스플레이 가운데 정렬 */
   text-align: center;
 }
@@ -23,25 +24,26 @@ button {
 
 .list {/* <section> */
   width: 400px;
-  background-color: rgb(236, 241, 250);
+  background-color: rgb(236, 246, 250);
   margin: 30px auto;
   border-radius: 20px;
+  box-shadow: 0 0 10px 5px rgb(112, 173, 173);
 }
 
 .header {
   height: 48px;
   padding: 8px;
-  background-color: rgb(134, 229, 253);
+  background: #a6f5e5;
+  background: linear-gradient(90deg, rgba(166, 245, 229, 1) 0%, rgba(65, 186, 196, 1) 52%, rgba(116, 214, 149, 1) 100%);
   color: white;
   border-radius: 20px 20px 0 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .items { /* ul태그 */
   height: 450px;
-}
-
-.item_row {
-  list-style: none;
 }
 
 /* 오늘 할일 목록 리스트 시작 되는 부분 */
@@ -65,7 +67,8 @@ button {
 }
 
 .footer {
-  background-color: rgb(134, 229, 253);
+  background: #a6f5e5;
+  background: linear-gradient(90deg, rgba(166, 245, 229, 1) 0%, rgba(65, 186, 196, 1) 52%, rgba(116, 214, 149, 1) 100%);
   color: white;
   border-radius: 0 0 20px 20px;
 }
@@ -79,14 +82,44 @@ button {
   padding: 0 16px;
 }
 
-.footer-button {
+.footer_button {
   width: 48px;
   height: 48px;
   font-size: 28px;
   border-radius: 50%;
 }
 
-.footer-button:hover {
+.footer_button:hover {
   transform: scale(1.1);
   transition: transform 300ms ease-in
+}
+
+.load_sample_button {
+  border: none;
+  background: none;
+  color: white;
+  padding: 8px;
+  cursor: pointer;
+  font-size: 20px;
+  transition: transform 300ms ease-in
+}
+
+.load_sample_button:hover {
+  transform: scale(1.1);
+  color: black;
+}
+
+.reset_button {
+  border: none;
+  background: none;
+  color: white;
+  padding: 8px;
+  cursor: pointer;
+  font-size: 20px;
+  transition: transform 300ms ease-in
+}
+
+.reset_button:hover {
+  transform: rotate(180deg);
+  color: black;
 }
