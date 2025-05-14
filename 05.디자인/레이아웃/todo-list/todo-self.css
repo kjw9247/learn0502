@@ -6,12 +6,11 @@
 ul {
   /* 2. 기본 패딩과 구슬 없애기 */
   padding: 0;
-  list-style: none;
 }
 
 body {
   /* 3. 디스플레이 배경색 지정 */
-  background-color: #b6f8f5;
+  background-color: #f0dede;
   /* 4. 디스플레이 가운데 정렬 */
   text-align: center;
 }
@@ -24,7 +23,7 @@ button {
 
 .list {/* <section> */
   width: 400px;
-  background-color: rgb(236, 246, 250);
+  background-color: rgb(236, 241, 250);
   margin: 30px auto;
   border-radius: 20px;
 }
@@ -32,14 +31,17 @@ button {
 .header {
   height: 48px;
   padding: 8px;
-  background: #a6f5e5;
-  background: linear-gradient(90deg, rgba(166, 245, 229, 1) 0%, rgba(65, 186, 196, 1) 52%, rgba(116, 214, 149, 1) 100%);
+  background-color: rgb(134, 229, 253);
   color: white;
   border-radius: 20px 20px 0 0;
 }
 
 .items { /* ul태그 */
   height: 450px;
+}
+
+.item_row {
+  list-style: none;
 }
 
 /* 오늘 할일 목록 리스트 시작 되는 부분 */
@@ -63,8 +65,7 @@ button {
 }
 
 .footer {
-  background: #a6f5e5;
-  background: linear-gradient(90deg, rgba(166, 245, 229, 1) 0%, rgba(65, 186, 196, 1) 52%, rgba(116, 214, 149, 1) 100%);
+  background-color: rgb(134, 229, 253);
   color: white;
   border-radius: 0 0 20px 20px;
 }
