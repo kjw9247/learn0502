@@ -1,0 +1,120 @@
+*{
+  box-sizing: border-box;
+}
+
+ul {
+  padding: 0;
+  list-style: none;
+}
+
+body {
+  background-color: #b6f8f5;
+  text-align: center;
+}
+
+button {
+  outline: none;
+  border: none;
+  cursor: pointer;
+}
+
+.list {
+  width: 400px;
+  background-color: rgb(236, 246, 250);
+  margin: 30px auto;
+  border-radius: 20px;
+  box-shadow: 0 0 10px 5px rgb(112, 173, 173);
+}
+
+.header {
+  height: 48px;
+  padding: 8px;
+  background: #a6f5e5;
+  background: linear-gradient(90deg, rgba(166, 245, 229, 1) 0%, rgba(65, 186, 196, 1) 52%, rgba(116, 214, 149, 1) 100%);
+  color: white;
+  border-radius: 20px 20px 0 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.items {
+  height: 450px;
+}
+
+.item {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 32px;
+}
+
+.item-delete:hover {
+  color: darkred;
+  transform: scale(1.1);
+  transition: transform 300ms ease-in
+}
+
+.item_divider {
+  width: 90%;
+  background-color: rgb(209, 233, 233);
+  height: 2px;
+  margin: auto;
+}
+
+.footer {
+  background: #a6f5e5;
+  background: linear-gradient(90deg, rgba(166, 245, 229, 1) 0%, rgba(65, 186, 196, 1) 52%, rgba(116, 214, 149, 1) 100%);
+  color: white;
+  border-radius: 0 0 20px 20px;
+}
+
+.footer_input { 
+  width: 100%;
+  height: 32px;
+  border: none;
+  outline: none;
+  font-size: 20px;
+  padding: 0 16px;
+}
+
+.footer_button {
+  width: 48px;
+  height: 48px;
+  font-size: 28px;
+  border-radius: 50%;
+}
+
+.footer_button:hover {
+  transform: scale(1.1);
+  transition: transform 300ms ease-in
+}
+
+.load_sample_button {
+  border: none;
+  background: none;
+  color: white;
+  padding: 8px;
+  cursor: pointer;
+  font-size: 20px;
+  transition: transform 300ms ease-in
+}
+
+.load_sample_button:hover {
+  transform: scale(1.1);
+  color: black;
+}
+
+.reset_button {
+  border: none;
+  background: none;
+  color: white;
+  padding: 8px;
+  cursor: pointer;
+  font-size: 20px;
+  transition: transform 300ms ease-in
+}
+
+.reset_button:hover {
+  transform: rotate(180deg);
+  color: black;
+}
