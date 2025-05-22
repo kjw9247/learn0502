@@ -1,3 +1,7 @@
+// 비동기 통신 객체 생성하기
+// 미리 생성 or search 함수가 호출 될 때마다 객체 생성을 하나?
+const xhr = new XMLHttpRequest();
+
 const container = document.querySelector('#root');
 // 조건 검색 결과를 화면에 출력
 
@@ -13,10 +17,37 @@ const container = document.querySelector('#root');
 
 const search = (query) => {
   console.log("사용자가 입력하는 키워드는 " + query);
+  const SEARCH_URL = `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=5&q=${query}&key=AIzaSyC3x0BnoCntN8q7Jcj-1oRlPbDnLiiyQKw`
+  xhr.open('GET', SEARCH_URL, false)
+  xhr.send()
+
+  const videoList = []
+  const result = JSON.parse(xhr.responseText)
+  console.log(result.items);
+  // 썸네일과 채널이름 영상제목은 snippet안에 있지만 썸네일 클릭시 영상재생에
+  // 필요한 videoID는 snippet밖에 있다
+  const vitems = result.items.map(item => ({...item, id: item.id.videoId }));
+  // console.log(vitems);
+  videoList.push("<ul class='videos'>")
+  for(let i=0;i<vitems.length;i++){
+    videoList.push(`<li class="container">`)
+    videoList.push(`<div class="video">`)
+    videoList.push(
+      `<img src="${vitems[i].snippet.thumbnails.medium.url}"></img>`
+    )
+    videoList.push(`<div>`)
+    videoList.push(`<p class="title">${vitems[i].snippet.title}</p>`)
+    videoList.push(`<p class="title">${vitems[i].snippet.channelTitle}</p>`)
+    videoList.push(`</div>`)
+    videoList.push(`</div>`)
+    videoList.push(`</li>`)
+  }// end of for
+  videoList.push("</ul>")
+  container.innerHTML = videoList.join("")
 }// end of search
 
 
-container.innerHTML = '조회결과'
+
 
 /*
 1. 키워드를 입력한 뒤 엔터를 치거나 검색이미지 버튼을 클릭했을 때 유튜브 서버에 요청을 한다
