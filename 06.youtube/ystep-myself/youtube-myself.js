@@ -8,8 +8,11 @@ const container = document.querySelector('#root');
 
     const result = JSON.parse(xhr.responseText)
     const vitems = result.items.map(item => ({
-      
-    }))
+      title: item.snippet.title,
+      channel: item.snippet.channelTitle,
+      thumbnail: item.snippet.thumbnails.medium.url,
+      videoId: item.id.videoId  
+    }));
 
 }
 
