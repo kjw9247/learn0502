@@ -37,4 +37,4 @@ for(let i=0;i<10;i++){
     `)
 }
 newsList.push('</ul>');
-container.innerHTML = newsList.join("")
+container.innerHTML = newsList.join("")/////

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>부서목록</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.8/handlebars.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+  <!-- 
+  x-handlebars=template는 표쥰이 아니다
+  표준이 아니라는 건 재해석이 필요하다 = handlebars scripts추가함 - handlebars를 모르는 상태이기 때문
+  아래 코드는 핸들바스로 되어있는 탬플릿을 컴파일 해야 함
+  아래 id를 찾아서 데이터셋과 binding 해줌
+  -->
+  <script id="temp_news" type="text/x-handlebars-template"> <!-- 메인타입 text 서브타입 x-handlebars-template -->
+    <ul>
+      {{#each this}}
+      <li>
+        <a href="{{url}}">{{title}}</a> <!-- <a href="#">{{dname}}</a> -->
+        <p>By: {{user}} | comments: {{comments_count}}</p>
+      </li>
+      {{/each}}
+    </ul>
+  </script>
+  <!-- 데이터를 렌더링할 컨테이너 -->
+  <div id="root"></div>
+</body>
+<script>
+  const newsList = () => {
+    fetch('https://api.hnpwa.com/v0/news/1.json')
+    .then(response => {
+      if(!response.ok) throw new Error('응답실패 - 200이 아니면 성공이 아니면') // 중지
+      return response.json()
+    })
+    .then(data => {
+      console.log(data);
+      // 데이터를 쥐고 있다면... 핸들바스 연동 - 컴파일 -> 태그와 자바스크립트 병합
+
+      // 1. 템플릿 가져오기 - innerHTML
+      const source = document.querySelector("#temp_news").innerHTML
+      // 2. 템플릿 컴파일 -  compile()
+      const temp = Handlebars.compile(source)
+      // 3. 데이터 렌더링 - data
+      const html = temp(data)
+      // 4. 결과출력 - innerHTML
+      document.querySelector("#root").innerHTML = html
+    })
+    .catch(error => {// 에러 발생시 잡히면 브라우저가 error를 주입해줌
+      // 파라미터에 error 객체는 null이나 undefined이 아니다
+      console.log(error);// 디버깅에 필요한 메시지
+    }) // 에러가 있을때만 이 부분이 실행됨
+    // end of fetch
+  }// end of newsList
+
+  // 함수 호출하기
+  newsList()
+</script>
+</html>
