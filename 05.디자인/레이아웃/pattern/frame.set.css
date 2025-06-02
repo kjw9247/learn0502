@@ -1,0 +1,49 @@
+* {
+  box-sizing: border-box;
+  border: 1px solid lightgrey;
+}
+
+.container {
+  width: 1080px;
+  overflow: hidden; 
+  margin: 0 auto;
+  margin-bottom: 8px;
+}
+
+ul.gnb {
+  background-color: aqua;
+  list-style: none;
+  padding-left: 0;
+  float: left;
+}
+
+/* ul.gnb > li {} */
+
+ul.rank {
+  float: right;
+  background-color: yellow;
+  padding-left: 0;
+}
+
+ul.rank > li {
+  list-style-type: none;
+}
+
+.left {
+  float: left;
+  background-color: red;
+  width: 740px;
+  height: 428px;
+}
+
+.right {
+  float: right;
+  background-color: blue;
+  width: 332px;
+  height: 428px;
+}
+
+.footer {
+  background-color: yellow;
+  height: 80px;
+}
