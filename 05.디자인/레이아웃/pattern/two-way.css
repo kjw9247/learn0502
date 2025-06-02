@@ -1,0 +1,25 @@
+* {
+  box-sizing: border-box;
+  border: 1px solid red;
+}
+
+.container {
+  width: 100%;
+  overflow: hidden;
+  margin: 0 auto;
+  margin-bottom: 8px;
+}
+
+.left {
+  float: left;
+  background-color: red;
+  width: 740px;
+  height: 428px;
+}
+
+.right {
+  float: right;
+  background-color: blue;
+  width: 332px;
+  height: 428px;
+}

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="kr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>공지사항 작성하기</title>
+</head>
+<body>
+<!-- 입력 폼 양식 구현하기
+  함수 - 파라미터, 리턴타입
+  사용자가 입력한 값을 받아주는 곳 - input 태그
+  id값과 name값이 같아도 된다
+  id값은 javascript에서 사용하고 name은 back-end에서 사용함
+  request.getParameter("name")
+  아래 입력 받는 속성들 중에 필수 입력사항이 있다 - not null
+  식별자 역할 - not null, unique -> 테이블 셜계하기 -> ERD 그리기
+  Entity Relation Diagram
+  테이블 설계 - 검증 - 화면 정의서 - 속성이 빠지지 않았나?, 식별자 역할을 할 컬럼을 세운다
+  어려운점 - 화면 정의서에 없는 컬럼을 찾아낸다 - 어려움
+  집합과 집합 사이의 관계를 조인문으로 출력한다
+-->
+
+<!-- |post|put|delete --> 
+  <form action="formSend.html" method="post"><!-- |post|put|delete --> 
+    <div class="form-example">
+      <label for="n_title">제목</label>
+      <input type="text" name="n_title" id="n_title" placeholder="제목을 입력하시오">
+    </div>
+    <div class="form-example">
+      <label for="n_content">내용</label>
+      <input type="text" name="n_content" id="n_content" placeholder="내용을 입력하시오">
+    </div>
+    <div class="form-example">
+      <label for="n_file">첨부파일</label>
+      <input type="file" name="n_file" id="n_file" placeholder="파일을 선택하시오">
+    </div>
+    <div class="form-example.butoon">
+      <button type="submit" id="btnSave" value="저장">저장</button>
+    </div>
+  </form>
+<div>
+
+  <table border="1">
+  <tr>
+    <th>Company</th>
+    <th>Contact</th>
+    <th>Country</th>
+    <th>Country</th>
+  </tr>
+  <tr>
+    <td>Alfreds Futterkiste</td>
+    <td>Maria Anders</td>
+    <td>Germany</td>
+    <td>Germany</td>
+  </tr>
+  <tr>
+    <td>Centro comercial Moctezuma</td>
+    <td>Francisco Chang</td>
+    <td>Mexico</td>
+    <td>Mexico</td>
+  </tr>
+</table>
+
+</div>
+</body>
+</html>
+
+<!--
+http://127.0.0.1:5500/03.%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8/%EB%94%94%EB%B2%84%EA%B9%85/insert.no?n_title=%EA%B3%B5%EC%A7%80%EC%A0%9C%EB%AA%A9&n_content=%EA%B3%B5%EC%A7%80%EB%82%B4%EC%9A%A9&n_file=woman1.png
+// 사용자가 입력하고 저장 버튼 클릭하면
+
+http://127.0.0.1:5500/03.%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8/%EB%94%94%EB%B2%84%EA%B9%85/question4.html
+
+1. url이 변경되었다
+: 기존에 요청이 끊어지고 새로운 요청이 일어났다
+: 기존에 쥐고 있던 정보를 모두 잃어버린다
+: http가 비상태 프로토콜이기 때문에
+
+2. REST API get 방식은 사용자가 입력한 값이 모두 보인다
+: 보안에 취약함
+: 링크를 걸 수 있다
+: 브라우저 마다 서버에 전달 할 수 있는 값에 제힌이 있다
+: 만일 POST 방식으로 전송하면 보이지 않는다
+
+3. form태그의 action에는 이 요청을 처리해줄 페이지 이름을 적는다
+action에 html 파일을 적을 수는 있지만 보통은 back-end 페이지나 요청 URL적는다
+오라클 : 1521포트 번호사용
+mysql : 3306포트 번호사용
+데이터베이스 서비스는 전산센터, 위탁관리 맡김, AWS - 물리적으로 was와 떨어져 있다
+통신 -> 이종간에 처리 -> 데이터를 넘긴다
+-->
+
