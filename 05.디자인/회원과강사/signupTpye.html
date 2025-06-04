@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>회원|강사</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link rel="stylesheet" href="./signTpye.css">
+</head>
+<body>
+    <div class="center-container">
+      <div class="type-form">
+        <div class="type-div" id="member-btn">
+          <i class="fas fa-person-running type-icon"></i>
+          <span class="type-label">회원</span>
+        </div>
+        <hr class="type-divider" />
+        <div class="type-div" id="teacher-btn">
+          <i class="fas fa-person-chalkboard type-icon"></i>
+          <span class="type-label">강사</span>
+        </div>
+      </div>
+    </div>
+    <script>
+      document.querySelector('#member-btn').addEventListener('click,', ()=>{
+        window.location.href = './signup.html?type=member'
+      })
+      document.querySelector('#teacher-btn').addEventListener('click,', ()=>{
+        window.location.href = './signup.html?type=teacher'
+      })
+    </script>
+</body>
+</html>

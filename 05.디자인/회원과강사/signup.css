@@ -1,0 +1,138 @@
+body {
+  background: #f7f9fb;
+  margin: 0;
+  font-family: 'Segoe UI', Arial, sans-serif;
+}
+.signup-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 1000px;
+  min-width: 300px;
+  width: 90%;
+  padding: 80px 40px;
+  border-radius: 30px;
+  margin: 80px 0;
+  border: 2px solid lightgrey;
+  background: #fff;
+  box-shadow: 0 8px 36px 0 rgba(0, 0, 0, 0.08);
+}
+.my-h1 {
+  font-size: 34px;
+  margin-bottom: 40px;
+  font-weight: 700;
+  text-align: center;
+}
+.signup-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 40px;
+  width: 100%;
+  margin-bottom: 20px;
+}
+.signup-section {
+  padding: 30px;
+  flex: 1 1 320px;
+  min-width: 320px;
+  max-width: 440px;
+}
+.item-section {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.my-label {
+  font-size: 14px;
+  color: #414149;
+  display: block;
+  margin-bottom: 10px;
+  position: relative;
+  margin-top: 20px;
+}
+.my-label span.required {
+  color: red;
+  margin-left: 2px;
+  font-size: 15px;
+}
+.my-label-ab {
+  color: #85858b;
+  font-size: 11px;
+  margin-left: 8px;
+  display: inline-block;
+  margin-top: 2px;
+  min-height: 15px;
+}
+.my-input {
+  width: 100%;
+  height: 32px;
+  border: none;
+  border-bottom: 1px solid #dddddd;
+  font-size: 15px;
+  padding: 0 2px;
+  margin-bottom: 4px;
+  background: transparent;
+}
+.my-input:focus,
+.my-input:hover {
+  border-bottom: 2px solid #004fff;
+  outline: none;
+}
+.my-input[readonly] {
+  background: #f4f4f6;
+  color: #7d7d85;
+}
+.my-button {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  background-color: white;
+  color: black;
+  border-radius: 15px;
+  font-size: 14px;
+  border: 1px solid lightgray;
+  width: 85px;
+  height: 36px;
+  cursor: pointer;
+}
+.my-button:hover {
+  background: #e8e8e8;
+}
+.submit-button {
+  margin-top: 30px;
+  width: 275px;
+  height: 48px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 24px;
+  margin-bottom: 12px;
+  border: 1.5px solid rgb(105, 175, 245);
+  color: white;
+  background: rgb(105, 175, 245);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.submit-button:disabled {
+  background: rgb(175, 210, 244);
+  cursor: not-allowed;
+}
+.pw-eye {
+  position: absolute;
+  right: 12px;
+  top: 36px;
+  cursor: pointer;
+  color: #bbb;
+}
+.gender-group {
+  margin: 10px 0 0 0;
+  display: flex;
+  gap: 30px;
+  font-size: 15px;
+}
+.address-flex {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}

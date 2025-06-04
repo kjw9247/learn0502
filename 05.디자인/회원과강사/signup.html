@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>회원가입</title>
+  <link rel="stylesheet" href="./signup.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+</head>
+<body>
+  <script>
+    //인증과 인가와 관련있음 - 권한 문제
+    //모든 페이지를 아무나 다 볼  수 없다.- 제약이 있다.
+    ///signup.html?type=member
+    ///signup.html?type=teacher
+    let params = new URLSearchParams(document.location.search);
+    let type = params.get("type");//member 이거나 teacher 결정됨. // 문자열 "Jonathan"
+    console.log(type);//member, teacher
+    if('member' === type){//일반회원이야?
+      console.log('일반회원 가입 페이지 입니다.');
+    }
+    //너 혹시 코치야?
+    else if('teacher' === type){
+      console.log('강사 가입 페이지 입니다.');
+    }
+  </script>
+
+  <form class="signup-form" id="signupForm" autocomplete="off" method="get" action="signupAction.html">
+    <h1 class="my-h1">회원가입</h1>
+    <div class="signup-row">
+      <div class="signup-section">
+        <div class="item-section">
+          <label class="my-label"
+            >이메일 <span class="required">*</span>
+            <input type="email" class="my-input" id="email" name="email" placeholder="이메일을 입력해주세요." required />
+            <div class="my-label-ab" id="email-ab"></div>
+          </label>
+          <button type="button" class="my-button" id="checkEmailBtn">중복확인</button>
+        </div>
+        <div class="item-section">
+          <label class="my-label"
+            >닉네임 <span class="required">*</span>
+            <input type="text" class="my-input" id="nickname" name="nickname" value="의적홍길동" placeholder="닉네임을 입력해주세요." required />
+            <div class="my-label-ab" id="nickname-ab"></div>
+          </label>
+          <button type="button" class="my-button" id="checkNicknameBtn">중복확인</button>
+        </div>
+        <label class="my-label"
+          >비밀번호 <span class="required">*</span>
+          <input
+            type="password"
+            class="my-input"
+            id="password"
+            name="password"
+            placeholder="비밀번호를 입력해주세요."
+            required
+          />
+          <i class="fa fa-eye pw-eye" id="togglePassword"></i>
+          <div class="my-label-ab" id="password-ab"></div>
+        </label>
+        <label class="my-label"
+          >비밀번호 확인 <span class="required">*</span>
+          <input
+            type="password"
+            class="my-input"
+            id="password2"
+            name="password2"
+            placeholder="비밀번호를 한번 더 입력해주세요."
+            required
+          />
+          <i class="fa fa-eye pw-eye" id="togglePassword2"></i>
+          <div class="my-label-ab" id="password2-ab"></div>
+        </label>
+      </div>
+      <div class="signup-section">
+        <label class="my-label"
+          >이름 <span class="required">*</span>
+          <input type="text" class="my-input" id="name" name="name" value="홍길동" placeholder="이름을 입력해주세요." required />
+          <div class="my-label-ab" id="name-ab"></div>
+        </label>
+        <label class="my-label"
+          >전화번호
+          <input type="text" class="my-input" id="hp" name="hp" value="01012345678" placeholder="전화번호를 입력해주세요." />
+          <div class="my-label-ab" id="hp-ab"></div>
+        </label>
+        <label class="my-label"
+          >생년월일
+          <input type="text" class="my-input" id="birthday" name="birthday" placeholder="생년월일(YYYYMMDD)" />
+          <div class="my-label-ab" id="birthday-ab"></div>
+        </label>
+        <label class="my-label"
+          >주소
+          <div class="address-flex">
+            <input type="text" class="my-input" id="post" name="post" placeholder="주소 검색을 해주세요." readonly />
+            <button type="button" class="my-button" id="searchAddrBtn">주소검색</button>
+          </div>
+        </label>
+        <label class="my-label"
+          >상세주소
+          <input type="text" class="my-input" id="postDetail" name="postDetail" placeholder="상세주소를 입력해주세요." />
+        </label>
+        <label class="my-label" style="margin-bottom: 0">성별</label>
+        <div class="gender-group">
+          <label><input type="radio" name="gender" value="없음" checked /> 없음</label>
+          <label><input type="radio" name="gender" value="남자" /> 남자</label>
+          <label><input type="radio" name="gender" value="여자" /> 여자</label>
+        </div>
+      </div>
+    </div>
+    <button type="submit" class="submit-button" id="signupBtn" disabled>가입하기</button>
+  </form>
+  <script>
+    document.querySelector('#searchAddrBtn').addEventListener('click', () => {
+      console.log('우편번호 검색 버튼');
+      if(typeof daum === 'undefined' || !daum.Postcode){
+        alert('다음 우편번호 서비스를 불러 올 수 없습니다')
+        return // 이 후 코드는 실행 기회를 갖지 못합니다
+      }
+      new daum.Postcode({
+        // 파라미터가 사용자가 입력한 값을 가진다
+        // 파라미터에 사용자가 입력한 동으로 검색한 결과가 담겼다(중요)
+        oncomplete: function(data) {
+          // console.log(data); // object obect
+          document.querySelector('#post').value = data.address || data.roadAddress
+          document.querySelector('#postDetail').focus() // 커서를 자동으로 옮겨줄게
+        }
+      }).open()
+    })
+    //비밀번호 : show / hide - 3항연산자 활용
+    //스타일에 적용도 JS 조건별 처리가 가능하다.
+    document.querySelector('#togglePassword').onclick = function(){
+      const pw = document.querySelector('#password')
+      this.classList.toggle('fa-eye-slash')
+      pw.type = pw.type === 'password' ? 'text': 'password'
+      this.style.color = pw.type === 'password' ? '#bbbbbb': '#555555'
+    }
+    document.querySelector('#togglePassword2').onclick = function(){
+      const pw = document.querySelector('#password2')
+      this.classList.toggle('fa-eye-slash')
+      pw.type = pw.type === 'password' ? 'text': 'password'
+      this.style.color = pw.type === 'password' ? '#bbbbbb': '#555555'
+    }
+    //유효성 검사도 개발자 몫이다.
+    //JS 처리한다.
+    //필수 입력 모두 채워지면 버튼 활성화 해줘
+    const requiredIds = ['email', 'nickname', 'password', 'password2', 'name']
+    requiredIds.forEach(id => {
+      document.querySelector(`#${id}`).addEventListener('input', checkFormReady)
+    })
+
+    function checkFormReady(){
+      const allFilled = requiredIds.every(id => document.querySelector(`#${id}`).value.trim())
+      const pw = document.querySelector('#password').value
+      const pw2 = document.querySelector('#password2').value
+      const pwMatch = pw && pw2 && pw === pw2
+      document.querySelector('#signupBtn').disabled =!(allFilled && pwMatch)
+    }
+  </script>
+</body>
+</html>
