@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>홀수는 작게, 짝수는 크게</title>
+  <script
+  crossorigin
+  src="https://unpkg.com/react@18/umd/react.development.js"
+  ></script>
+  <script
+    crossorigin
+    src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+  ></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>  
+</head>
+<body type="text/babel">
+  <div id="root"></div>
+    <script type="text/babel">
+      const root = document.querySelector('#root')
+      const Number2 = (props) => { // 삼항연산자
+        console.log(props.x);
+        // const { x } = props
+        return props.selected ? <h1>{props.x}</h1> : <h3>{props.x}</h3>
+        // js영역이다
+      } // end of Message
+      const element = ( // num={1} 요게 props다
+        <>
+          <Number2 x={1}/>
+          <Number2 x={2} selected={true}/>
+          <Number2 x={872}/>
+          <Number2 x={223425}/>
+        </>
+      )
+      ReactDOM.createRoot(root).render(element)
+    </script>
+</body>
+</html>

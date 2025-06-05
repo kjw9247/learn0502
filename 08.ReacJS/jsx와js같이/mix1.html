@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JS리렌더링 실험</title>
+  <script
+  crossorigin
+  src="https://unpkg.com/react@18/umd/react.development.js"
+  ></script>
+  <script
+    crossorigin
+    src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+  ></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>  
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+      const root = document.querySelector('#root')
+      const message = ({text}) => {
+        // js영역이다
+        if(text.chatAt(0) === text.charAt.toUpperCase()){
+          return (
+            <h1>
+            {/* 여기는 JSX이다 */}
+            {text} {/* 여기는 JS이이고 파라미터로 받은 text이다 */}
+            </h1> //* 여기는 JS이다
+          )
+        }
+        else{
+          return <h3>{text}</h3>
+        }
+      } // end of Message
+      const element = (
+        <>
+          <Message text="Text"/>
+          <Message text="text"/>
+        </>
+      )
+      ReactDOM.createRoot(root).render(element)
+    </script>
+
+
+</body>
+</html>
+
+<!--
+text가 대문자로 시작하면 h1
+소문자로 시작하면 h3으로 출력하는 코드를 작성하시오
+-->
