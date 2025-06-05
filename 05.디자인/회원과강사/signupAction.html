@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>회원가입정보 확인 페이지</title>
+</head>
+<body>
+  <div id="userInfo"></div>
+  <script>
+    // URL 파라미터에서 데이터 가져오기 - GET 방식 - query string(?, &)   key value?
+    const urlParams = new URLSearchParams
+    console.log(urlParams.get('email'));
+    console.log(urlParams.get('nickname'));
+    console.log(urlParams.get('name'));
+    console.log(urlParams.get('hp'));
+    console.log(urlParams.get('birthday'));
+    console.log(urlParams.get('post'));
+    console.log(urlParams.get('postDetail'));
+    console.log(urlParams.get('gender'));
+    const displayUserInfo = () => {
+      console.log('displayUserInfo');
+      document.querySelector('#userInfo').innerHTML = "<h3>lee@hot.come</h3>"
+    }
+    window.onload = displayUserInfo
+  </script>
+</body>
+</html>
