@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JS리렌더링실험</title>
+  <script
+  crossorigin
+  src="https://unpkg.com/react@18/umd/react.development.js"
+  ></script>
+  <script
+    crossorigin
+    src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+  ></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script> 
+</head>
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+    const rootElement = document.querySelector('#root')
+    function random() {
+      const number = Math.floor(Math.random()*(10-1)+1)
+      const element = `
+        <button>${number}</button>
+      `
+      rootElement.innerHTML = element
+    } // end of tick
+    setInterval(random, 1000);
+  </script>
+</body>
+</html>
+
+<!-- 
+관전 포인트
+예제를 실행한 후 페이지에 포커스가 있는 상태에서
+탭키를 누르면 버튼에 테두리가 진하게 들어오면서 선택이 되지만
+setInterval함수 호출이 1초 마다 진행되면서 탭선택에 대한
+버튼의 포커를 계속 잃어버린다
+-->

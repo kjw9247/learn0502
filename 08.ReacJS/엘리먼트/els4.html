@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script
+  crossorigin
+  src="https://unpkg.com/react@18/umd/react.development.js"
+  ></script>
+  <script
+    crossorigin
+    src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+  ></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>  
+</head>
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+    const rootElement = document.querySelector('#root')
+    //태그와 JS섞어쓰기 된다.
+    //리액트에서는 함수를 대문자로 쓰면 함수가 태그가 된다.???
+    //리액트에서는 부모태그에서 자손태그로 값이나 주소번지를 넘길 수 있다.
+    //props를 통해서 가능하다.
+    const Paint = ({title, description}) =>(
+      <>
+        <h1>{title}</h1>
+        <h3>{description}</h3>
+      </>
+  )
+    const element = (
+      <>
+        <Paint title='JAVA1' description='객체지향1' />
+        <Paint title='JAVA2' description='객체지향2' />
+        <Paint title='JAVA3' description='객체지향3' />
+      </>
+    )
+    ReactDOM.createRoot(rootElement).render(element)
+  </script>
+</body>
+</html>
+<!--
+데이터가 바뀌면 화면도 다시 그린다.(렌더링 - render)
+-->
