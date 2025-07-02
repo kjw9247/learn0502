@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script
+  crossorigin
+  src="https://unpkg.com/react@18/umd/react.development.js"
+  ></script>
+  <script
+    crossorigin
+    src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+  ></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>  
+</head>
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+    const rootElement = document.querySelector('#root')
+    // input에 입력된 값을 keyword에 담아야 한다. 이 값을 업데이트를 해야 한다면?
+    const App = () => {
+      const [keyword, setKeyword] = React.useState("")
+      const [result, setResult] = React.useState("")
+      const [typing, serTyping] = React.useState(false) // boolean의 기본값은 자바도 false
+      const handleChange = (event) => {
+        setKeyword(event.targe.value)
+        setTyping(true)
+      }
+      const handleClick = () => {
+          setTyping(false)
+          setResult(`we find results of ${keyword}`) 
+      }
+      return(
+        <>
+          <input type="text" onChange={handleChange} />
+          <button type="button" onClick={handleClick}>검색</button>
+          <p>
+            {typing ? `Looking for ${keyword}...` : result}
+          </p>
+        </>
+      )
+    }
+      ReactDOM.createRoot(rootElement).render(<App />)
+  </script>
+</body>
+</html>

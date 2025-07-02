@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script
+  crossorigin
+  src="https://unpkg.com/react@18/umd/react.development.js"
+  ></script>
+  <script
+    crossorigin
+    src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+  ></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>    
+</head>
+<body>
+    <div id="root"></div>
+  <script type="text/babel">
+    const App = () => {
+      // 일반변수 state훅 차이는?
+      // 데이터가 변경이 일어나면 자동 렌더링 됨
+      // 훅을 사용하면 이전 값을 기억하고 있다
+      const title = "책제목"
+      const [책제목, 책제목설정] = React.useState("자바의 정석")
+      const [좋아요, 좋아요설정] = React.useState(0)
+      const add = () => {
+        좋아요설정(좋아요 + 1)
+        책제목설정('리액트'+ 1)
+      } 
+      const minus = () => {
+        좋아요설정(좋아요 - 1)
+        책제목설정('오라클' -1)
+      }
+      return (
+      <>
+        <div>
+          <h3>{책제목}</h3>
+          <span onClick={add}>👍</span>
+          {좋아요}
+          <span onClick={minus}>👎</span>
+        </div>
+      </>
+      )
+    }
+    ReactDOM.createRoot(root).render(<App />)
+  </script>
+</body>
+</html>

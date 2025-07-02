@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script
+  crossorigin
+  src="https://unpkg.com/react@18/umd/react.development.js"
+  ></script>
+  <script
+    crossorigin
+    src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+  ></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>  
+</head>
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+    const rootElement = document.querySelector("#root")
+    //input 에 입력된 값을 keyword에 담아야 한다. 이 값을 업데이트를 해야 한다면?
+    const App = () => {
+      const [keyword, setKeyword] = React.useState(()=>{
+        console.log('initialize');
+        return window.localStorage.getItem("keyword")
+      })
+      const [result, setResult] = React.useState("")
+      const [typing, setTyping] = React.useState(false)
+      const handleChange = (event) => {
+        window.localStorage.setItem("keyword", keyword)
+        setKeyword(event.target.value)
+        setTyping(true)
+      }
+      const handleClick = () => {
+        setTyping(false)
+        setResult(`We find results of ${keyword}`)
+      }
+      return (
+        <>
+          <input type="text" onChange={handleChange} value={keyword}/>
+          <button type="button" onClick={handleClick}>검색</button>
+          <p>
+            {typing ? `Looking for ${keyword}...` : result}
+          </p>
+        </>
+      )
+    }
+    ReactDOM.createRoot(rootElement).render(<App />)
+  </script>
+</body>
+</html>
+<!--
+  event3.html예제에 입력한 문자열 값을 localStorage에 저장하고 읽어오기
+  DB: 데이터 영속성 보장
+-->

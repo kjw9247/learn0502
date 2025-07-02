@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script
+  crossorigin
+  src="https://unpkg.com/react@18/umd/react.development.js"
+  ></script>
+  <script
+    crossorigin
+    src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+  ></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>  
+</head>
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+    const rootElement = document.querySelector("#root")
+    //input 에 입력된 값을 keyword에 담아야 한다. 이 값을 업데이트를 해야 한다면?
+    const App = () => {
+      const [keyword, setKeyword] = React.useState(()=>{
+        console.log('initialize');
+        return window.localStorage.getItem("keyword")
+      })
+      const [result, setResult] = React.useState("")
+      const [typing, setTyping] = React.useState(false)
+      // 문제제기
+      // 로컬 스토리지에서 가져올 때 읽어오는 시간이
+      // 결과를 받아오는 함수를 useState훅에 작성 가능하다
+      // 로컬스토리지를 들렸다가 와야하니까 지연이 발생한다
+      // 어떻게하면 시간차 없이 keyword가 바뀔 때 마다
+      // localStorage 저장 할 수 있을까? - useEffect
+      React.useEffect(()=>{
+        console.log('effect');
+        // keyword가 바뀌는 것이 메인 효과이고 그것을 localStorage에
+        // 저장하는것이 사이드 이펙트이다
+        // 사이드 이펙트라고 한다
+        window.localStorage.setItem("keyword", keyword)
+      },[keyword])
+      const handleChange = (event) => {
+        setKeyword(event.target.value)
+        setTyping(true)
+      }
+      const handleClick = () => {
+        setTyping(false)
+        setResult(`We find results of ${keyword}`)
+      }
+      return (
+        <>
+          <input type="text" onChange={handleChange} value={keyword}/>
+          <button type="button" onClick={handleClick}>검색</button>
+          <p>
+            {typing ? `Looking for ${keyword}...` : result}
+          </p>
+        </>
+      )
+    }
+    ReactDOM.createRoot(rootElement).render(<App />)
+  </script>
+</body>
+</html>
+<!--
+  event3.html예제에 입력한 문자열 값을 localStorage에 저장하고 읽어오기
+  DB: 데이터 영속성 보장
+-->

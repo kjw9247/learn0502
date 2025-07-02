@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script
+  crossorigin
+  src="https://unpkg.com/react@18/umd/react.development.js"
+  ></script>
+  <script
+    crossorigin
+    src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+  ></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>    
+  <style>
+    .list {
+      padding-left: 20px;
+      text-align: left;
+      border-bottom: 1px solid gray;
+      list-style: none;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+    <div id="root"></div>
+  <script type="text/babel">
+    const App = () => {
+      // 일반변수 state훅 차이는?
+      // 데이터가 변경이 일어나면 자동 렌더링 됨
+      // 훅을 사용하면 이전 값을 기억하고 있다
+      const [books, setBooks] = React.useState([
+        "자바의 정석", "리액트", "오라클"
+      ])
+      const [like, setLike] = React.useState([0,0,0])
+      const [dislike, setDislike] = React.useState([0,0,0])
+      const likeAdd = () => {
+        setLike(like + 1)
+      } 
+      const dislikeAdd = () => {
+        setDislike(dislike +1)
+      }
+      // 도서제목 수정
+      const bookUpdate = () => {
+        const book_copy = [...books]
+        book_copy[1] = "스프링"
+        setBooks(book_copy)
+      }
+      // 도서제목 정렬
+      const bookSort = () => {
+        const book_copy = [...books]
+        book_copy.sort()
+        setBooks(book_copy)
+      }
+      return (
+      <>
+        <button onClick={bookUpdate}>제목수정</button>
+        <button onClick={bookSort}>제목정렬</button>
+        <ul>
+          {books.map((title, index) => (
+          <li className="list" key={index}>
+          {title} &nbsp;&nbsp; - &nbsp;&nbsp;
+          <span onClick={() => {
+            let copy = [...like]
+            copy[index] = copy[index] + 1
+            setLike(copy)
+          }}>👍</span>
+          &nbsp;&nbsp;{like[index]}&nbsp;&nbsp;
+          <span onClick={() =>{
+            let copy = [...dislike]
+            copy[index] = copy[index] + 1
+            setDislike(copy)
+          }}>👎</span>
+          &nbsp;&nbsp;{dislike[index]}&nbsp;&nbsp;
+          </li>
+          ))}
+        </ul>
+      </>
+      )
+    }
+
+    const Modal = (props) => {
+      return (
+        <>
+          <div className="modal">
+            <h3>제목 : {props.title}</h3>
+            <h4>index : {props.index}</h4>
+            <p>도서소개</p>
+          </div>
+        </>
+      )
+    }
+    ReactDOM.createRoot(root).render(<App />)
+  </script>
+</body>
+</html>

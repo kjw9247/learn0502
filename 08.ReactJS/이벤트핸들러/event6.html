@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script
+  crossorigin
+  src="https://unpkg.com/react@18/umd/react.development.js"
+  ></script>
+  <script
+    crossorigin
+    src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+  ></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>  
+</head>
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+    const rootElement = document.querySelector("#root")
+    const App = () => {
+      const keywordState = React.useState("")
+      const keyword = keywordState[0] // 관리할 상태값
+      const setKeyword = keyword[1] // 뒤에꺼는 상태를 바꾸어주는 역할을 했다
+      const [result, setResult] = React.useState("")
+      const [typing, setTyping] = React.useState(false)
+      React.useEffect(()=>{
+        console.log('effect');
+        window.localStorage.setItem("keyword", keyword)
+      },[keyword])
+      const handleChange = (event) => {
+        setKeyword(event.target.value)
+        setTyping(true)
+      }
+      const handleClick = () => {
+        setTyping(false)
+        setResult(`We find results of ${keyword}`)
+      }
+      return (
+        <>
+          <input type="text" onChange={handleChange} value={keyword}/>
+          <button type="button" onClick={handleClick}>검색</button>
+          <p>
+            {typing ? `Looking for ${keyword}...` : result}
+          </p>
+        </>
+      )
+    }
+    ReactDOM.createRoot(rootElement).render(<App />)
+  </script>
+</body>
+</html>
