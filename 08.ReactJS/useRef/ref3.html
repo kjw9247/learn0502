@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <script
+  crossorigin
+  src="https://unpkg.com/react@18/umd/react.development.js"
+  ></script>
+  <script
+    crossorigin
+    src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+  ></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script> 
+</head>
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+    const rootElement = document.querySelector("#root")
+    // 이러면 참조하는 컴포넌트에 변화가 생겨도 useState처럼
+    // 다시 렌더링 하지 않는다
+    const App = () => {
+      const inputRef = React.useRef()
+      const divRef = React.useRef()
+      console.log('11');
+      React.useEffect(()=>{
+        console.log('12');
+        inputRef.current.focus()
+        setTimeout(() => {
+          divRef.current.style.backgroundColor = 'red'
+        },2000)
+      },[]) // 의존성 배열이 비어있다면 최초 한번만 싱행이 된다
+      return(
+      <>
+        <input type="text" ref={inputRef} />
+        <div
+          ref={divRef}
+          style={{ height: 100, width: 300, backgroundColor:'green' }}
+          />
+      </>
+      )
+    }
+    ReactDOM.createRoot(rootElement).render(<App />)
+  </script>
+</body>
+</html>

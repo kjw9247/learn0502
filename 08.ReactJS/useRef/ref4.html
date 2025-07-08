@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <script
+  crossorigin
+  src="https://unpkg.com/react@18/umd/react.development.js"
+  ></script>
+  <script
+    crossorigin
+    src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+  ></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script> 
+</head>
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+    const rootElement = document.querySelector("#root")
+    // 이러면 참조하는 컴포넌트에 변화가 생겨도 useState처럼
+    // 다시 렌더링 하지 않는다
+    const App = () => {
+      console.log('리렌더링');
+      const inputRef = React.useRef()
+      const countRef = React.useRef()
+      const timerRef = React.useRef(null)
+      const [timer, setTimer] = React.useState(0)
+
+      // 1. 버튼 누르면 포커스
+      const handleFocus = () => {
+        if(inputRef.current) inputRef.current.focus()
+      }
+      // 2. useRef로 카운트한 누적(리렌더링 없이)
+        const handleAddCount = () => {
+          countRef.current += 1
+          alert(`누적 카운트(리렌더링 X) : ${countRef.current} `)
+        }
+      // 3. setInterval 로 1초 마다 증가/중가 버튼처리
+      const handleStart = () => {
+        if(timerRef.current) return;
+        timerRef.current = setInterval(() => {
+          setTimer(prev => prev + 1)
+        },1000)
+      }
+      const handleStop = () => {
+        clearInterval(timerRef.current)
+        timerRef.current = null
+      }
+      return(
+      <>
+        <input type="text" ref={inputRef} />
+        <button type="button" onClick={handleFocus}>input포커스</button>
+        <hr />
+        <button type="button" onClick={handleAddCount}>카운트 누적</button>
+        <hr />
+        <div>타이머: {timer}초</div>
+        <button type="button" onClick={handleStart}>타이머시작</button>
+        <button type="button" onClick={handleStop}>타이머중단</button>
+        </>
+      )
+    }
+    ReactDOM.createRoot(rootElement).render(<App />)
+  </script>
+</body>
+</html>
+
+<!-- 
+handleAddCount가 실행되면 countRef.current+=1로 useRef값이 증가함
+그러나 화면에서는 alert창에서만 값 확인
+
+버튼을 여러 번 눌러도 <App /> 컴포넌트가 리렌더링되지 않는다
+
+그런 다음 카운트 누적 버튼을 계속 눌러도 렌더링 글자는 출력이 안된다
+
+반면 타이머 시작으로 timer가 {useState}바뀌면 1초마다 렌더링 글자가 출력된다
+-->
